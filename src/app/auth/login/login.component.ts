@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+
 import { UsersService } from '../../shared/services/users.service';
 import { User } from '../../shared/models/user.model';
 import { Message } from '../../shared/models/message.model';
+import { AuthService } from '../../shared/services/auth.service';
 
 @Component({
   selector: 'hm-login',
@@ -14,7 +17,11 @@ export class LoginComponent implements OnInit {
   form: FormGroup;
   message: Message = null;
 
-  constructor(private usersService: UsersService) { }
+  constructor(
+    private auth: AuthService,
+    private usersService: UsersService,
+    // private router: Router
+  ) { }
 
   ngOnInit() {
     this.form = new FormGroup({
@@ -29,6 +36,10 @@ export class LoginComponent implements OnInit {
       if (user) {
         if (user.password === formData.password) {
           this.showMessage('welcome', 'success');
+          // this.message = null;
+          localStorage.setItem('user', JSON.stringify(user));
+          this.auth.login();
+          // this.router.navigate(['']);
         } else {
           this.showMessage('Пароль не верный', 'danger');
         }
