@@ -8,14 +8,14 @@ import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
+    AuthComponent,
     LoginComponent,
-    RegistrationComponent,
-    AuthComponent
+    RegistrationComponent
   ],
   imports: [
-    AuthRoutingModule,
+    CommonModule,
     SharedModule,
-    CommonModule
+    AuthRoutingModule
   ]
 })
 export class AuthModule {}

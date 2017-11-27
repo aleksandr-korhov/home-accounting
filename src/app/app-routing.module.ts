@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { SystemComponent } from './system/system.component';
 
 const routes: Routes = [
-  {path: '', redirectTo: 'login', pathMatch: 'full'}
+  {path: '', redirectTo: 'login', pathMatch: 'full'},
+  // {path: 'system', component: SystemComponent}
 ]
 
 @NgModule({
