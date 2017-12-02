@@ -42,11 +42,11 @@ export class LoginComponent implements OnInit {
     this.usersService.getByEmail(formData.email).subscribe((user: User) => {
       if (user) {
         if (user.password === formData.password) {
-          this.showMessage('welcome', 'success');
-          // this.message = null;
+          // this.showMessage('welcome', 'success');
+          this.message = null;
           localStorage.setItem('user', JSON.stringify(user));
           this.auth.login();
-          // this.router.navigate(['']);
+          this.router.navigate(['/system', 'bill']);
         } else {
           this.showMessage('Пароль не верный', 'danger');
         }
