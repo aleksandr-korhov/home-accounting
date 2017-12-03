@@ -10,4 +10,8 @@ export class AppComponent {
   addDevMethod() {
     console.log('dev method');
   }
+
+  prodMethod() {
+    console.log('prod method');
+  }
 }
