@@ -9,4 +9,8 @@ export class AppComponent {
   testGitflow() {
     console.log('12345');
   }
+
+  test2() {
+
+  }
 }
