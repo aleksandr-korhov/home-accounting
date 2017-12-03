@@ -14,9 +14,9 @@ import { SystemModule } from './system/system.module';
   ],
   imports: [
     BrowserModule,
+    AppRoutingModule,
     AuthModule,
-    SystemModule,
-    AppRoutingModule
+    SystemModule
   ],
   providers: [UsersService, AuthService],
   bootstrap: [AppComponent]
