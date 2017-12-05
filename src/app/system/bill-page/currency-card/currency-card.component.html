@@ -16,12 +16,12 @@
           <tr>
             <td>RUB</td>
             <td>1</td>
-            <td>{{ currency.date }}</td>
+            <td>{{ currency.date | hmMoment:'YYYY-MM-DD' }}</td>
           </tr>
           <tr *ngFor="let curr of currencies">
             <td>{{ curr }}</td>
             <td>{{ currency.rates[curr] }}</td>
-            <td>{{ currency.date }}</td>
+            <td>{{ currency.date | hmMoment:'YYYY-MM-DD' }}</td>
           </tr>
         </tbody>
       </table>
