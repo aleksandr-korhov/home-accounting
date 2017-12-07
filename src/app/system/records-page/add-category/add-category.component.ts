@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 
 import { CategoryService } from '../../shared/services/category.service';
 import { Category } from '../../shared/models/category.model';
+import { Message } from '../../../shared/models/message.model';
 
 @Component({
   selector: 'hm-add-category',
@@ -11,6 +12,8 @@ import { Category } from '../../shared/models/category.model';
 })
 export class AddCategoryComponent {
   @Output() onCategoryAdd = new EventEmitter<Category>();
+
+  message: Message = null;
 
   constructor(private categoryService: CategoryService) { }
 
@@ -23,11 +26,23 @@ export class AddCategoryComponent {
 
     const category = new Category(name, capacity);
 
-    this.categoryService.addCategory(category).subscribe((newCategory: Category) => {
-      form.reset();
-      form.form.patchValue({capacity: 1});
-      this.onCategoryAdd.emit(newCategory);
-    });
+    this.categoryService.addCategory(category).subscribe(
+      (newCategory: Category) => {
+        form.reset();
+        form.form.patchValue({capacity: 1});
+          this.onCategoryAdd.emit(newCategory);
+          this.message = new Message('success', 'Категория добавлена');
+          setTimeout(() => {
+            this.message = null;
+          }, 5000);
+        },
+      err => {
+          console.log(err);
+          this.message = new Message('danger', 'Категория не добавлена');
+          setTimeout(() => {
+            this.message = null;
+          }, 5000);
+        });
   }
 
 }
