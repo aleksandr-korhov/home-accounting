@@ -5,36 +5,54 @@
     </div>
   </div>
   <div class="card-block">
-    <form>
+    <form #eventForm="ngForm" (ngSubmit)="onSubmit(eventForm)">
       <div class="form-group">
         <label class="control-label" for="category">Выберите категорию</label>
-        <select class="form-control" id="category">
-          <option>Option one</option>
-          <option>Option two</option>
-          <option>Option three</option>
-          <option>Option four</option>
+        <select id="category"
+                [ngModel]="1"
+                required
+                name="category"
+                class="form-control">
+          <option *ngFor="let cat of categoryList" [value]="cat.id">{{ cat.name }}</option>
         </select>
       </div>
       <div class="form-group">
         <label class="control-label">Выберите тип</label>
-        <div>
+        <div *ngFor="let type of types">
           <label>
-            <input class="radio" name="radios" type="radio">
-            <span>Доход</span>
-          </label>
-        </div>
-        <div>
-          <label>
-            <input class="radio" name="radios" type="radio" checked>
-            <span>Расход</span>
+            <input class="radio"
+                   [ngModel]="'outcome'"
+                   [value]="type.type"
+                   name="type"
+                   type="radio">
+            <span>{{ type.label }}</span>
           </label>
         </div>
       </div>
-      <div class="form-group">
+      <div class="form-group" [ngClass]="{'has-error': amount.invalid && amount.touched}">
         <label class="control-label" for="amount">Введите сумму</label>
-        <input type="number" value="0" id="amount" class="form-control">
+        <input id="amount"
+               ngModel="1"
+               required
+               min="1"
+               #amount="ngModel"
+               name="amount"
+               type="number"
+               class="form-control">
+        <span *ngIf="amount.invalid && amount.touched" class="form-help-text">Поле не может быть пустым.</span>
       </div>
-      <button type="submit" class="btn btn-primary">Добавить</button>
+      <div class="form-group" [ngClass]="{'has-error': description.invalid && description.touched}">
+        <label class="control-label" for="amount">Описание</label>
+        <input id="description"
+               type="text"
+               ngModel
+               required
+               #description="ngModel"
+               name="description"
+               class="form-control">
+        <span *ngIf="description.invalid && description.touched" class="form-help-text">Поле не может быть пустым.</span>
+      </div>
+      <button type="submit" class="btn btn-primary" [disabled]="eventForm.invalid">Добавить</button>
     </form>
   </div>
 </div>
