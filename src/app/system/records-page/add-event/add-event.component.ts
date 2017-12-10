@@ -4,6 +4,8 @@ import * as moment from 'moment';
 
 import { Category } from '../../shared/models/category.model';
 import { HmEvent } from '../../shared/models/event.model';
+import { EventService } from '../../shared/services/event.service';
+import { BillService } from '../../shared/services/bill.service';
 
 @Component({
   selector: 'hm-add-event',
@@ -15,9 +17,11 @@ export class AddEventComponent implements OnInit {
   types = [
     {type: 'income', label: 'Доход'},
     {type: 'outcome', label: 'Расход'}
-  ]
+  ];
 
-  constructor() { }
+  constructor(private eventService: EventService,
+              private billService: BillService) {
+  }
 
   ngOnInit() {
   }
@@ -33,6 +37,7 @@ export class AddEventComponent implements OnInit {
 
     const event = new HmEvent(type, amount, +category, moment().format('DD.MM.YYYY HH:mm:ss'), description);
     console.log(event);
+    this.eventService.addEvent(event).subscribe((event: HmEvent) => console.log(event));
   }
 
 }
