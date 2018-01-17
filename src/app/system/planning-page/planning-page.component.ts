@@ -49,6 +49,21 @@ export class PlanningPageComponent implements OnInit, OnDestroy {
     return (catCost * 100) / cat.capacity;
   }
 
+  getColorClass(cat: Category) {
+    let colorClass = 'warning';
+    const catPercent = this.getCatPercent(cat);
+
+    if (catPercent < 30) {
+      colorClass = 'success';
+    } else if (catPercent > 60) {
+      colorClass = 'danger';
+    } else {
+      colorClass = 'warning';
+    }
+
+    return colorClass;
+  }
+
   ngOnDestroy() {
     this.sub.unsubscribe();
   }
