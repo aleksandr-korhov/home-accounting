@@ -9,19 +9,19 @@ export class BaseApi {
 
   constructor(protected http: HttpClient) {}
 
-  private getUrl(url: string = ''): string {
+  protected getUrl(url: string = ''): string {
     return this.baseUrl + url;
   }
 
-  public get(url: string = ''): Observable<any> {
+  protected get(url: string = ''): Observable<any> {
     return this.http.get(this.getUrl(url));
   }
 
-  public post(url: string = '', params: any = {}): Observable<any> {
+  protected post(url: string = '', params: any = {}): Observable<any> {
     return this.http.post(this.getUrl(url), params);
   }
 
-  public put(url: string = '', params: any = {}): Observable<any> {
+  protected put(url: string = '', params: any = {}): Observable<any> {
     return this.http.put(this.getUrl(url), params);
   }
 }
